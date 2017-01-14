@@ -1,0 +1,15 @@
+{
+  "name": "algorithms",
+  "version": "1.0.0",
+  "main": "index.js",
+  "repository": "git@github.com:izumskee/algorithms.git",
+  "author": "Ilya <ilyaizumskee@gmail.com> (http://izumskee.com/)",
+  "license": "MIT",
+  "devDependencies": {
+    "babel-cli": "^6.18.0",
+    "babel-preset-latest": "^6.16.0"
+  },
+  "scripts": {
+    "build": "babel src -d lib"
+  }
+}
