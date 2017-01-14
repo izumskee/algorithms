@@ -14,6 +14,6 @@
   },
   "scripts": {
     "compile": "babel src -d lib",
-    "test": "npm run compile && mocha --compilers js:babel-core/register ./test/**/*.spec.js"
+    "test": "npm run compile && mocha --compilers js:babel-core/register ./tests/**/*.spec.js"
   }
 }
