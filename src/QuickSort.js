@@ -1,10 +1,10 @@
-const QuickSort = (A, p, r) => {
+const Quicksort = (A, p, r) => {
   if (r <= p) return;
 
   let q = Partition(A, p, r);
 
-  QuickSort(A, p, q - 1);
-  QuickSort(A, q + 1, r);
+  Quicksort(A, p, q - 1);
+  Quicksort(A, q + 1, r);
 };
 
 const Partition = (A, p, r) => {
@@ -29,4 +29,4 @@ const swap = (array, indexA, indexB) => {
   array[indexB] = temp;
 };
 
-export default QuickSort;
+export default Quicksort;
