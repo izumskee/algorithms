@@ -1,8 +1,23 @@
-const shuffleArray = (a) => {
-  for (let i = a.length; i; i--) {
-    let j = Math.floor(Math.random() * i);
-    [a[i - 1], a[j]] = [a[j], a[i - 1]];
+/*
+ * Modified Fisher–Yates Shuffle
+*/
+
+const shuffleArray = (array) => {
+  let m = array.length, t, i;
+
+  // While there remain elements to shuffle
+  while (m) {
+
+    // Pick a remaining element
+    i = Math.floor(Math.random() * m--);
+
+    // And swap it with the current element
+    t = array[m];
+    array[m] = array[i];
+    array[i] = t;
   }
+
+  return array;
 };
 
 export default shuffleArray;
