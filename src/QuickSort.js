@@ -2,8 +2,6 @@ import shuffleArray from './shuffleArray';
 
 class Quicksort {
   constructor(array) {
-
-    // Sorted array
     this.A = array;
 
     // Improvements. Cutoff to insertion sort. As with mergesort, 
