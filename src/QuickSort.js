@@ -2,25 +2,51 @@ import shuffleArray from './shuffleArray';
 
 class Quicksort {
   constructor(array) {
+
+    // Sorted array
     this.A = array;
+
+    // Improvements. Cutoff to insertion sort. As with mergesort, 
+    // it pays to switch to insertion sort for tiny arrays. 
+    // The optimum value of the cutoff is system-dependent, 
+    // but any value between 5 and 15 is likely to work well in most situations.
+    this.CUTOFF = 8; 
   }
 
   _quicksort(A, p, r) {
-    if (r <= p) return;
+    const n = r - p + 1;
 
-    // Use randomized partition for better performance
-    const q = this._randomizedPartition(A, p, r);
+    // Improvements. Cutoff to insertion sort.
+    if (n <= this.CUTOFF) {
+      this._insertionSort(A, p, r);
+      return;
+    }
 
+    // Improvements. Median-of-three partitioning.
+    // A second easy way to improve the performance of quicksort 
+    // is to use the median of a small sample of items taken from 
+    // the array as the partitioning item.
+    const m = this._median3(A, p, Math.floor(p + n / 2), r);
+    this._swap(A, m, p);
+
+    const q = this._partition(A, p, r);
     this._quicksort(A, p, q - 1);
     this._quicksort(A, q + 1, r);
   }
 
-  _randomizedPartition(A, p, r) {
-    const i = this._random(p, r);
+  // Return the index of the median element among a[i], a[j], and a[k]
+  _median3(A, i, j, k) {
+    return (A[i] < A[j] ?
+            (A[j] < A[k] ? j : A[i] < A[k] ? k : i) :
+            (A[k] < A[j] ? j : A[k] < A[i] ? k : i));
+  }
 
-    this._swap(A, r, i);
-
-    return this._partition(A, p, r);
+  _insertionSort(A, p, r) {
+    for (let i = p; i <= r; i++) {
+      for (let j = i; j > p && A[j] < A[j - 1]; j--) {
+        this._swap(A, j, j - 1);
+      }
+    }
   }
 
   _partition(A, p, r) {
@@ -39,16 +65,10 @@ class Quicksort {
     return i + 1;
   }
 
-  _swap(array, indexA, indexB) {
-    const temp = array[indexA];
-    array[indexA] = array[indexB];
-    array[indexB] = temp;
-  }
-
-  _random(min, max) {
-    let rand = min - 0.5 + Math.random() * (max - min + 1)
-    rand = Math.round(rand);
-    return rand;
+  _swap(A, i, j) {
+    const temp = A[i];
+    A[i] = A[j];
+    A[j] = temp;
   }
 
   sort() {
