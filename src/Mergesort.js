@@ -1,10 +1,25 @@
 class Mergesort {
   constructor(array) {
     this.A = array;
+    this.CUTOFF = 7;
   }
 
   _getLength() {
     return this.A.length;
+  }
+
+  _insertionSort(A, p, r) {
+    for (let i = p; i <= r; i++) {
+      for (let j = i; j > p && A[j] < A[j - 1]; j--) {
+        this._swap(A, j, j - 1);
+      }
+    }
+  }
+
+  _swap(A, i, j) {
+    const temp = A[i];
+    A[i] = A[j];
+    A[j] = temp;
   }
 
   _merge(a, aux, lo, mid, hi) {
@@ -24,12 +39,18 @@ class Mergesort {
   }
 
   _sorting(a, aux, lo, hi) {
-    if (hi <= lo) return;
+    if (hi <= lo + this.CUTOFF - 1) {
+      this._insertionSort(a, lo, hi); // Use insertion sort for small subarrays
+      return;
+    }
 
     const mid = Math.floor(lo + (hi - lo) / 2);
 
     this._sorting(a, aux, lo, mid);
     this._sorting(a, aux, mid + 1, hi);
+
+    if (a[mid+1] >= a[mid]) return; // Stop if already sorted
+
     this._merge(a, aux, lo, mid, hi);
   }
 
