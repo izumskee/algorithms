@@ -3,6 +3,10 @@ class Mergesort {
     this.A = array;
   }
 
+  _getLength() {
+    return this.A.length;
+  }
+
   _merge(a, aux, lo, mid, hi) {
     for (let k = lo; k <= hi; k++) {
       aux[k] = a[k];
@@ -30,7 +34,7 @@ class Mergesort {
   }
 
   sort() {
-    this._sorting(this.A, [...this.A], 0, this.A.length - 1);
+    this._sorting(this.A, [...this.A], 0, this._getLength() - 1);
     return this.A;
   }
 }
