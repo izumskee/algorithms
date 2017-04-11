@@ -21,17 +21,16 @@ class Mergesort {
 
   _sorting(a, aux, lo, hi) {
     if (hi <= lo) return;
-    const mid = lo + (hi - lo) / 2;
+
+    const mid = Math.floor(lo + (hi - lo) / 2);
+
     this._sorting(a, aux, lo, mid);
     this._sorting(a, aux, mid + 1, hi);
     this._merge(a, aux, lo, mid, hi);
   }
 
   sort() {
-    const aux = [...this.A];
-
-    this._sorting(this.A, aux, 0, this.A.length - 1);
-
+    this._sorting(this.A, [...this.A], 0, this.A.length - 1);
     return this.A;
   }
 }
